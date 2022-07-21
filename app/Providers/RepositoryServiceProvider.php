@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Source\Modules\Product\Repository\Eloquent\ProductRepositoryEloquent;
-use App\Source\Modules\Product\Repository\Port\ProductRepositoryInterface;
+use App\Source\Modules\Product\Infra\Repository\Eloquent\ProductRepositoryEloquent;
+use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -15,7 +15,8 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(ProductRepositoryInterface::class, ProductRepositoryEloquent::class);        
+        $this->app->bind(ProductRepositoryInterface::class, ProductRepositoryEloquent::class);
+        // $this->app->bind(ProductRepositoryInterface::class, ProductRepositoryMemory::class);
     }
 
     /**
