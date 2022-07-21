@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\product;
+namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Source\Modules\Product\Repository\Port\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-  // public function __construct(
-  //   protected ProductService $service
-  // ) {
-  // }
+  public function __construct(private ProductRepositoryInterface $repository) {
+  }
 
   public function index(Request $request)
   {
-    return 'ProductController->index()';
+    return 'index';
+    // return ProductIndexUseCase::make($this->repository)->execute();
   }
 
 
