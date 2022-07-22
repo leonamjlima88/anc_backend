@@ -5,14 +5,12 @@ namespace App\Source\Modules\Product\Adapter\Repository\Eloquent;
 use App\Source\Modules\Product\Domain\Entity\ProductEntity;
 use App\Source\Modules\Product\Adapter\Mapper\ProductMapper;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class ProductRepositoryEloquent implements ProductRepositoryInterface
 {
-    private ProductModelEloquent $model;
     private ProductMapper $mapper;
-
-    public function __construct(){
-        $this->model = new ProductModelEloquent();
+    public function __construct(private Model $model){
         $this->mapper = ProductMapper::make();
     }  
     
@@ -50,7 +48,7 @@ class ProductRepositoryEloquent implements ProductRepositoryInterface
         return $entity;        
     }
 
-    private function findById(int $id): ProductModelEloquent|null
+    private function findById(int $id): Model|null
     {
         return $this->model->where('id', $id)->first();
     }

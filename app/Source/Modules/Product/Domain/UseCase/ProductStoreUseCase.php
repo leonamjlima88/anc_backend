@@ -8,16 +8,19 @@ use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
 
 final class ProductStoreUseCase
 {
-    private function __construct(private ProductRepositoryInterface $repository){}
+    private ProductMapper $mapper;
+    private function __construct(private ProductRepositoryInterface $repository){
+        $this->mapper = ProductMapper::make();
+    }
 
     public static function make(ProductRepositoryInterface $repository): self {
         return new self($repository);
     }
 
     public function execute(ProductDto $dto): ProductDto {
-        $entityMapped = ProductMapper::make()->dtoToEntity($dto);
+        $entityMapped = $this->mapper->dtoToEntity($dto);
         $entityStored = $this->repository->store($entityMapped);
-        $dtoMapped = ProductMapper::make()->entityToDto($entityStored);
+        $dtoMapped = $this->mapper->entityToDto($entityStored);
 
         return $dtoMapped;
     }

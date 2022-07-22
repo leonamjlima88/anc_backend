@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 final class ProductMapper
 {
+  private function __construct(){}
+  
   static public function make(): self
   {
     return new self();

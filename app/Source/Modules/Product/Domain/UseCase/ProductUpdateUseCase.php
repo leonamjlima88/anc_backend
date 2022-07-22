@@ -8,16 +8,19 @@ use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
 
 final class ProductUpdateUseCase
 {
-    private function __construct(private ProductRepositoryInterface $repository){}
+    private ProductMapper $mapper;
+    private function __construct(private ProductRepositoryInterface $repository){
+        $this->mapper = ProductMapper::make();
+    }
 
     public static function make(ProductRepositoryInterface $repository): self {
         return new self($repository);
     }
 
     public function execute(ProductDto $dto, int $id): ProductDto {
-        $entityMapped = ProductMapper::make()->dtoToEntity($dto);        
+        $entityMapped = $this->mapper->dtoToEntity($dto);        
         $entityUpdated = $this->repository->update($entityMapped, $id);
-        $dtoMapped = ProductMapper::make()->entityToDto($entityUpdated);
+        $dtoMapped = $this->mapper->entityToDto($entityUpdated);
 
         return $dtoMapped;
     }
