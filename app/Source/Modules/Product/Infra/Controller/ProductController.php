@@ -21,39 +21,37 @@ class ProductController extends Controller
 
   public function index(Request $request)
   {
-    return Res::json(
+    return Res::success(
       ProductIndexUseCase::make($this->repository)->execute()
-    );    
+    );
   }
 
   public function destroy(int $id)
   {
-    return ($deleted = ProductDestroyUseCase::make($this->repository)->execute($id))
-      ? Res::json(null, Response::HTTP_NO_CONTENT)
-      : Res::json(null, Response::HTTP_NOT_FOUND, true, 'Record not found!');
+    return ProductDestroyUseCase::make($this->repository)->execute($id) 
+      ? Res::success(code: Response::HTTP_NO_CONTENT)
+      : Res::error(code: Response::HTTP_NOT_FOUND);
   }
 
   public function show(int $id)
   {
     return ($dto = ProductShowUseCase::make($this->repository)->execute($id))
-      ? Res::json($dto)
-      : Res::json(null, Response::HTTP_NOT_FOUND, true);      
+      ? Res::success($dto)
+      : Res::error(code: Response::HTTP_NOT_FOUND);  
   }
 
   public function store(ProductDto $dto)
   {
-    return Res::json(
+    return Res::success(
       ProductStoreUseCase::make($this->repository)->execute($dto),
       Response::HTTP_CREATED
-    );
+  );
   }
 
   public function update(ProductDto $dto, int $id)
   {
-    return Res::json(
-      ProductUpdateUseCase::make($this->repository)->execute($dto, $id),
-      Response::HTTP_CREATED
-    );
+    return Res::success(
+      ProductUpdateUseCase::make($this->repository)->execute($dto, $id)
+    );    
   }
-
 }

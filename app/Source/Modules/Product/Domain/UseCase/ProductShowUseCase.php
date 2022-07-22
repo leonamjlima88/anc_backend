@@ -2,6 +2,7 @@
 
 namespace App\Source\Modules\Product\Domain\UseCase;
 
+use App\Source\Modules\Product\Domain\Exception\EntityNotFoundException;
 use App\Source\Modules\Product\Infra\Dto\ProductDto;
 use App\Source\Modules\Product\Infra\Mapper\ProductMapper;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
@@ -16,8 +17,8 @@ final class ProductShowUseCase
 
     public function execute(int $id): ProductDto {
         $entity = $this->repository->show($id);
-        $dto = ProductMapper::make()->entityToDto($entity);
+        throw_if(!$entity, new EntityNotFoundException());
 
-        return $dto;
+        return ProductMapper::make()->entityToDto($entity);
     }
 }

@@ -34,12 +34,11 @@ class ProductRepositoryEloquent implements ProductRepositoryInterface
         return $entityMapped;
     }
 
-    public function show(int $id): ProductEntity
+    public function show(int $id): ProductEntity|null
     {
-        $model = $this->findById($id);
-        $entity = $this->mapper->modelToEntity($model);
-        
-        return $entity;
+        return ($modelFound = $this->findById($id))
+         ? $this->mapper->modelToEntity($modelFound)
+         : null;        
     }
 
     public function update(ProductEntity $entity, int $id): ProductEntity
@@ -51,7 +50,7 @@ class ProductRepositoryEloquent implements ProductRepositoryInterface
         return $entity;        
     }
 
-    private function findById(int $id): ProductModelEloquent
+    private function findById(int $id): ProductModelEloquent|null
     {
         return $this->model->where('id', $id)->first();
     }

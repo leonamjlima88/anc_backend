@@ -18,6 +18,9 @@ final class ProductMapper
     return new ProductEntity(
       $dto->id,
       $dto->name,
+      $dto->description,
+      $dto->sku,
+      $dto->price,
       $dto->created_at,
       $dto->updated_at,
     );    
@@ -28,6 +31,9 @@ final class ProductMapper
     return new ProductDto(
       $entity->id,
       $entity->name,
+      $entity->description,
+      $entity->sku,
+      $entity->price,
       $entity->created_at,
       $entity->updated_at,
     );
@@ -38,6 +44,9 @@ final class ProductMapper
     return new ProductEntity(
       $model->id,
       $model->name,
+      $model->description,
+      $model->sku,
+      $model->price,
       $model->created_at,
       $model->updated_at,
     );    

@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use App\Source\Shared\util\Res;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Throwable;
 
@@ -54,8 +53,7 @@ class Handler extends ExceptionHandler
 
         // Rota não encontrada
         if ($exceptionName === 'NotFoundHttpException') {
-            return Res::json(
-                'message_lang.not_found_route_http',
+            return Res::error(
                 trans('message_lang.not_found_route_http'),
                 Response::HTTP_NOT_FOUND,
                 $exceptionName,
@@ -64,74 +62,45 @@ class Handler extends ExceptionHandler
 
         // Rota não encontrada
         if ($exceptionName === 'RouteNotFoundException') {
-            return $this->responseError(
+            return Res::error(
                 trans('message_lang.route_not_found_or_token_invalid'),
                 Response::HTTP_NOT_FOUND,
                 $exceptionName,
             );
         }
 
-        // // Validação dos dados
-        // if ($exceptionName === 'ValidationException') {
-        //     return $this->responseError(
-        //         $exception->errors(),
-        //         $exception->status,
-        //         $exceptionName,
-        //     );
-        // }
+        // Validação dos dados
+        if ($exceptionName === 'ValidationException') {
+            return Res::error(
+                $exception->errors(),
+                $exception->status,
+                $exceptionName,
+            );
+        }
 
-        // // Validação dos dados (Customizada)
-        // if ($exceptionName === 'CustomValidationException') {
-        //     return $this->responseError(
-        //         $exception->errors(),
-        //         $exception->status(),
-        //         $exceptionName,
-        //     );
-        // }      
-        
-        // // Model não encontrado
-        // if ($exceptionName === 'ModelNotFoundException') {
-        //     return $this->responseError(
-        //         $exception->getMessage(),
-        //         Response::HTTP_BAD_REQUEST,
-        //         $exceptionName,
-        //     );
-        // }
+        // Model não encontrado
+        if ($exceptionName === 'EntityNotFoundException') {
+            return Res::error(
+                $exception->getMessage(),
+                Response::HTTP_BAD_REQUEST,
+                $exceptionName,
+            );
+        }
 
-        // // Erro de query
-        // if ($exceptionName === 'QueryException') {
-        //     return $this->responseError(
-        //         $exception->getMessage(),
-        //         Response::HTTP_BAD_REQUEST,
-        //         $exceptionName,
-        //     );
-        // }
+        // Erro de query
+        if ($exceptionName === 'QueryException') {
+            return Res::error(
+                $exception->getMessage(),
+                Response::HTTP_BAD_REQUEST,
+                $exceptionName,
+            );
+        }
 
         // Caso nenhuma exceção seja executada acima.
-        return Res::json(
+        return Res::error(
             $exception->getMessage(),
             Response::HTTP_BAD_REQUEST,
-            // "Unexpected exception [${exceptionName}]",
+            "Unexpected exception [${exceptionName}]",
         );
-    }
-    
-    function responseError(mixed $result = [], int $code = Response::HTTP_BAD_REQUEST, string $msg = ''): JsonResponse
-    {
-        // Quando nenhuma mensagem informado, seta um default
-        if (!$msg) {
-            $msg = match ($code) {
-                Response::HTTP_BAD_REQUEST => trans('message_lang.http_bad_request'),
-                Response::HTTP_NOT_FOUND => trans('message_lang.http_not_found'),
-                default => '',
-            };
-        }
-    
-        // Retornar Resposta
-        return response()->json([
-            'code' => $code,
-            'error' => true,
-            'message' => $msg,
-            'result' => $result,
-        ], $code);        
     }    
 }
