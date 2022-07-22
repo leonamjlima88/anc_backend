@@ -15,40 +15,16 @@ final class ProductMapper
   
   public function dtoToEntity(ProductDto $dto): ProductEntity
   {
-    return new ProductEntity(
-      $dto->id,
-      $dto->name,
-      $dto->description,
-      $dto->sku,
-      $dto->price,
-      $dto->created_at,
-      $dto->updated_at,
-    );    
+    return new ProductEntity(...$dto->toArray());
   }
   
   public function entityToDto(ProductEntity $entity): ProductDto
   {
-    return new ProductDto(
-      $entity->id,
-      $entity->name,
-      $entity->description,
-      $entity->sku,
-      $entity->price,
-      $entity->created_at,
-      $entity->updated_at,
-    );
+    return new ProductDto(...$entity->toArray());
   }
 
   public function modelToEntity(Model $model): ProductEntity
   {
-    return new ProductEntity(
-      $model->id,
-      $model->name,
-      $model->description,
-      $model->sku,
-      $model->price,
-      $model->created_at,
-      $model->updated_at,
-    );    
+    return new ProductEntity(...$model->toArray());
   }
 }

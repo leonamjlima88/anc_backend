@@ -13,28 +13,14 @@ final class ProductEntity
     public ?string $created_at,
     public ?string $updated_at,
   ){}
-  public function toArray()
 
+  public function toArray()
   {
-    return [
-      "id"          => $this->id,
-      "name"        => $this->name,
-      "description" => $this->description,
-      "sku"         => $this->sku,
-      "price"       => $this->price,
-      "created_at"  => $this->created_at,
-      "updated_at"  => $this->updated_at,
-    ];
+    return (array) $this;
   }
 
-  public function fromArray(array $data)
+  static public function fromArray(array $data)
   {
-    $this->id          = $data['id'];
-    $this->name        = $data['name'];
-    $this->description = $data['description'];
-    $this->sku         = $data['sku'];
-    $this->price       = $data['price'];
-    $this->created_at  = $data['created_at'];
-    $this->updated_at  = $data['updated_at'];
+    return new self(...$data);
   }
 }

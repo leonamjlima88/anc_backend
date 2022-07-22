@@ -37,7 +37,7 @@ class ProductController extends Controller
   {
     return ($dto = ProductShowUseCase::make($this->repository)->execute($id))
       ? Res::success($dto)
-      : Res::error(code: Response::HTTP_NOT_FOUND);  
+      : Res::error(code: Response::HTTP_NOT_FOUND);
   }
 
   public function store(ProductDto $dto)
