@@ -3,25 +3,63 @@
 namespace App\Source\Modules\Product\Infra\Repository\Eloquent;
 
 use App\Source\Modules\Product\Domain\Entity\ProductEntity;
+use App\Source\Modules\Product\Infra\Mapper\ProductMapper;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
 
 class ProductRepositoryEloquent implements ProductRepositoryInterface
 {
-    public function index(){
-        return 'ELOQUENTxxx.index()';
+    private ProductModelEloquent $model;
+    private ProductMapper $mapper;
+
+    public function __construct(){
+        $this->model = new ProductModelEloquent();
+        $this->mapper = ProductMapper::make();
+    }  
+    
+    public function index(): array {
+        $models = $this->model->get();
+
+        $entities = [];
+        foreach ($models as $value) {
+            array_push($entities, $this->mapper->modelToEntity($value));
+        }
+
+        return $entities; 
     }
 
-    public function store(ProductEntity $entity): int {
-        // Salva no banco de dados
-        // ...
+    public function store(ProductEntity $entity): ProductEntity {
+        $modelCreated = $this->model->create($entity->toArray());
+        $entityMapped = $this->mapper->modelToEntity($modelCreated);
 
-        // Retorna chave primária
-        return 1;
+        return $entityMapped;
     }
 
     public function show(int $id): ProductEntity
     {
-        return ProductEntity::make(1, 'teste');
+        $model = $this->findById($id);
+        $entity = $this->mapper->modelToEntity($model);
+        
+        return $entity;
     }
 
+    public function update(ProductEntity $entity, int $id): ProductEntity
+    {
+        $model = $this->findById($id);
+        tap($model)->update($entity->toArray());
+        $entity = $this->mapper->modelToEntity($model);
+
+        return $entity;        
+    }
+
+    private function findById(int $id): ProductModelEloquent
+    {
+        return $this->model->where('id', $id)->first();
+    }
+
+    public function destroy(int $id): bool|null
+    {
+        return ($modelFound = $this->model->find($id)) 
+            ? $modelFound->delete() 
+            : false;
+    }
 }

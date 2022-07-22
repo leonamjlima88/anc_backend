@@ -2,11 +2,9 @@
 
 namespace App\Source\Modules\Product\Domain\UseCase;
 
-use App\Source\Modules\Product\Infra\Dto\ProductDto;
-use App\Source\Modules\Product\Infra\Mapper\ProductMapper;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
 
-final class ProductShowUseCase
+final class ProductDestroyUseCase
 {
     private function __construct(private ProductRepositoryInterface $repository){}
 
@@ -14,10 +12,7 @@ final class ProductShowUseCase
         return new self($repository);
     }
 
-    public function execute(int $id): ProductDto {
-        $entity = $this->repository->show($id);
-        $dto = ProductMapper::make()->entityToDto($entity);
-
-        return $dto;
+    public function execute(int $id): bool|null {
+        return $this->repository->destroy($id);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Source\Modules\Product\Infra\Mapper;
 
 use App\Source\Modules\Product\Domain\Entity\ProductEntity;
 use App\Source\Modules\Product\Infra\Dto\ProductDto;
+use Illuminate\Database\Eloquent\Model;
 
 final class ProductMapper
 {
@@ -12,19 +13,33 @@ final class ProductMapper
     return new self();
   }
   
-  public function mapFrom(ProductDto $dto): ProductEntity
+  public function dtoToEntity(ProductDto $dto): ProductEntity
   {
-    return ProductEntity::make(
+    return new ProductEntity(
       $dto->id,
       $dto->name,
-    );
+      $dto->created_at,
+      $dto->updated_at,
+    );    
   }
   
-  public function mapTo(ProductEntity $entity): ProductDto
+  public function entityToDto(ProductEntity $entity): ProductDto
   {
     return new ProductDto(
       $entity->id,
       $entity->name,
+      $entity->created_at,
+      $entity->updated_at,
     );
+  }
+
+  public function modelToEntity(Model $model): ProductEntity
+  {
+    return new ProductEntity(
+      $model->id,
+      $model->name,
+      $model->created_at,
+      $model->updated_at,
+    );    
   }
 }

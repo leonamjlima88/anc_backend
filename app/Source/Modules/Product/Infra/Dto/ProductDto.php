@@ -18,6 +18,12 @@ class ProductDto extends Data
 
     #[Rule('required|string|max:80')]
     public string $name,
+
+    #[Rule('nullable|string|min:10')]
+    public ?string $created_at,
+
+    #[Rule('nullable|string|min:10')]
+    public ?string $updated_at,
   ) {
   }
 

@@ -20,6 +20,6 @@ Route::group([
   Route::get("/product",         "ProductController@index")->name("product.index");
   Route::post("/product",        "ProductController@store")->name("product.store");
   Route::get("/product/{id}",    "ProductController@show")->name("product.show");
-  // Route::put("/product/{id}",    "ProductController@update")->name("product.update");
-  // Route::delete("/product/{id}", "ProductController@destroy")->name("product.destroy");
+  Route::put("/product/{id}",    "ProductController@update")->name("product.update");
+  Route::delete("/product/{id}", "ProductController@destroy")->name("product.destroy");
 });
