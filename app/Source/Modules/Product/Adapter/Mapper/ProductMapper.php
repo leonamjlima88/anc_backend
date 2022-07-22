@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Source\Modules\Product\Infra\Mapper;
+namespace App\Source\Modules\Product\Adapter\Mapper;
 
 use App\Source\Modules\Product\Domain\Entity\ProductEntity;
-use App\Source\Modules\Product\Infra\Dto\ProductDto;
+use App\Source\Modules\Product\Adapter\Dto\ProductDto;
 use Illuminate\Database\Eloquent\Model;
 
 final class ProductMapper

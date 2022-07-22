@@ -2,8 +2,8 @@
 
 namespace App\Source\Modules\Product\Domain\UseCase;
 
-use App\Source\Modules\Product\Infra\Dto\ProductDto;
-use App\Source\Modules\Product\Infra\Mapper\ProductMapper;
+use App\Source\Modules\Product\Adapter\Dto\ProductDto;
+use App\Source\Modules\Product\Adapter\Mapper\ProductMapper;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
 
 final class ProductUpdateUseCase

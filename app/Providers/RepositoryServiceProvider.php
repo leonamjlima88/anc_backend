@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Source\Modules\Product\Infra\Repository\Eloquent\ProductRepositoryEloquent;
+use App\Source\Modules\Product\Adapter\Repository\Eloquent\ProductRepositoryEloquent;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 

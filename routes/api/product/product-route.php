@@ -14,7 +14,7 @@ Route::group([
   //   'acl',
   //   'X-Locale'
   // ],
-  'namespace' => 'App\Source\Modules\Product\Infra\Controller'
+  'namespace' => 'App\Source\Modules\Product\Adapter\Controller'
   // 'prefix' => 'stock',
 ], function () {
   Route::get("/product",         "ProductController@index")->name("product.index");

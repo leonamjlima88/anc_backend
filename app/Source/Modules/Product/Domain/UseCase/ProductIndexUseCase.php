@@ -2,7 +2,7 @@
 
 namespace App\Source\Modules\Product\Domain\UseCase;
 
-use App\Source\Modules\Product\Infra\Mapper\ProductMapper;
+use App\Source\Modules\Product\Adapter\Mapper\ProductMapper;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
 
 final class ProductIndexUseCase

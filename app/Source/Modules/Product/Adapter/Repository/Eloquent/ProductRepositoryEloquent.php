@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Source\Modules\Product\Infra\Repository\Eloquent;
+namespace App\Source\Modules\Product\Adapter\Repository\Eloquent;
 
 use App\Source\Modules\Product\Domain\Entity\ProductEntity;
-use App\Source\Modules\Product\Infra\Mapper\ProductMapper;
+use App\Source\Modules\Product\Adapter\Mapper\ProductMapper;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
 
 class ProductRepositoryEloquent implements ProductRepositoryInterface

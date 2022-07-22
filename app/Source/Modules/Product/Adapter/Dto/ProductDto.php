@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Source\Modules\Product\Infra\Dto;
+namespace App\Source\Modules\Product\Adapter\Dto;
 
 use Illuminate\Validation\Rule as ValidationRule;
 use Spatie\LaravelData\Attributes\Validation\Rule;

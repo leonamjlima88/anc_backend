@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Source\Modules\Product\Infra\Repository\Memory;
+namespace App\Source\Modules\Product\Adapter\Repository\Memory;
 
 use App\Source\Modules\Product\Domain\Entity\ProductEntity;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Source\Modules\Product\Infra\Controller;
+namespace App\Source\Modules\Product\Adapter\Controller;
 
 use App\Source\Modules\Product\Domain\UseCase\ProductDestroyUseCase;
 use App\Source\Modules\Product\Domain\UseCase\ProductIndexUseCase;
 use App\Source\Modules\Product\Domain\UseCase\ProductShowUseCase;
 use App\Source\Modules\Product\Domain\UseCase\ProductStoreUseCase;
 use App\Source\Modules\Product\Domain\UseCase\ProductUpdateUseCase;
-use App\Source\Modules\Product\Infra\Dto\ProductDto;
+use App\Source\Modules\Product\Adapter\Dto\ProductDto;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
-use App\Source\Shared\Infra\Controller\Controller;
+use App\Source\Shared\Adapter\Controller\Controller;
 use App\Source\Shared\util\Res;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
