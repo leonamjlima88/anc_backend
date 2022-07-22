@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Product;
+namespace App\Source\Modules\Product\Infra\Controller;
 
-use App\Http\Controllers\Controller;
 use App\Source\Modules\Product\Domain\UseCase\ProductDestroyUseCase;
 use App\Source\Modules\Product\Domain\UseCase\ProductIndexUseCase;
 use App\Source\Modules\Product\Domain\UseCase\ProductShowUseCase;
@@ -10,6 +9,7 @@ use App\Source\Modules\Product\Domain\UseCase\ProductStoreUseCase;
 use App\Source\Modules\Product\Domain\UseCase\ProductUpdateUseCase;
 use App\Source\Modules\Product\Infra\Dto\ProductDto;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
+use App\Source\Shared\Infra\Controller\Controller;
 use App\Source\Shared\util\Res;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
