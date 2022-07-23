@@ -17,4 +17,5 @@ Route::group([
   Route::get("product/{id}",    [ProductController::class, 'show'])->name("stock-product.show");
   Route::put("product/{id}",    [ProductController::class, 'update'])->name("stock-product.update");
   Route::delete("product/{id}", [ProductController::class, 'destroy'])->name("stock-product.destroy");
+  Route::post("product/query",  [ProductController::class, 'query'])->name("stock-product.query");
 });

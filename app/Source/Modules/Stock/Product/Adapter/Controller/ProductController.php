@@ -8,8 +8,10 @@ use App\Source\Modules\Stock\Product\Domain\UseCase\ProductShowUseCase;
 use App\Source\Modules\Stock\Product\Domain\UseCase\ProductStoreUseCase;
 use App\Source\Modules\Stock\Product\Domain\UseCase\ProductUpdateUseCase;
 use App\Source\Modules\Stock\Product\Adapter\Dto\ProductDto;
+use App\Source\Modules\Stock\Product\Domain\UseCase\ProductQueryUseCase;
 use App\Source\Modules\Stock\Product\Port\Repository\ProductRepositoryInterface;
 use App\Source\Shared\Adapter\Controller\Controller;
+use App\Source\Shared\Adapter\Dto\PageFilter\PageFilterDto;
 use App\Source\Shared\util\Res;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -53,5 +55,12 @@ class ProductController extends Controller
     return Res::success(
       ProductUpdateUseCase::make($this->repository)->execute($dto, $id)
     );    
+  }
+
+  public function query(PageFilterDto $dto)
+  {
+    return Res::success(
+      ProductQueryUseCase::make($this->repository)->execute($dto)
+    );
   }
 }

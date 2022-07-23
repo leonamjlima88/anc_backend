@@ -59,4 +59,16 @@ class ProductRepositoryEloquent implements ProductRepositoryInterface
             ? $modelFound->delete() 
             : false;
     }
+
+    public function query(): array
+    {
+        $models = $this->model->get();
+
+        $entities = [];
+        foreach ($models as $value) {
+            array_push($entities, $this->mapper->modelToEntity($value));
+        }
+
+        return $entities;    
+    }
 }
