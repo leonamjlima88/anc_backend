@@ -4,8 +4,9 @@ namespace App\Source\Modules\Product\Domain\UseCase;
 
 use App\Source\Modules\Product\Adapter\Mapper\ProductMapper;
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
+use App\Source\Shared\Domain\UseCase\UseCaseBase;
 
-final class ProductIndexUseCase
+final class ProductIndexUseCase extends UseCaseBase
 {
     private function __construct(private ProductRepositoryInterface $repository){}
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Source\Modules\Product\Domain\Exception;
+namespace App\Source\Shared\Domain\Exception;
 
 use Exception;
 use Illuminate\Http\Response;

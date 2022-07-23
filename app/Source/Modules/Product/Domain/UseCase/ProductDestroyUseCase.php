@@ -3,8 +3,9 @@
 namespace App\Source\Modules\Product\Domain\UseCase;
 
 use App\Source\Modules\Product\Port\Repository\ProductRepositoryInterface;
+use App\Source\Shared\Domain\UseCase\UseCaseBase;
 
-final class ProductDestroyUseCase
+final class ProductDestroyUseCase extends UseCaseBase
 {
     private function __construct(private ProductRepositoryInterface $repository){}
 

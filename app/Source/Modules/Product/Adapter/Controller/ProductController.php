@@ -19,18 +19,18 @@ class ProductController extends Controller
   public function __construct(private ProductRepositoryInterface $repository) {
   }
 
-  public function index(Request $request)
-  {
-    return Res::success(
-      ProductIndexUseCase::make($this->repository)->execute()
-    );
-  }
-
   public function destroy(int $id)
   {
     return ProductDestroyUseCase::make($this->repository)->execute($id) 
       ? Res::success(code: Response::HTTP_NO_CONTENT)
       : Res::error(code: Response::HTTP_NOT_FOUND);
+  }
+
+  public function index(Request $request)
+  {
+    return Res::success(
+      ProductIndexUseCase::make($this->repository)->execute()
+    );
   }
 
   public function show(int $id)
