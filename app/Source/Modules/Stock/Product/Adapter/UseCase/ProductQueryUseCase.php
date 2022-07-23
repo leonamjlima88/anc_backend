@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Source\Modules\Stock\Product\Domain\UseCase;
+namespace App\Source\Modules\Stock\Product\Adapter\UseCase;
 
 use App\Source\Modules\Stock\Product\Adapter\Mapper\ProductMapper;
+use App\Source\Modules\Stock\Product\Domain\Service\ProductQueryService;
 use App\Source\Modules\Stock\Product\Port\Repository\ProductRepositoryInterface;
-use App\Source\Shared\Domain\UseCase\UseCaseBase;
+use App\Source\Shared\Adapter\Dto\PageFilter\PageFilterDto;
+use App\Source\Shared\Adapter\Mapper\PageFilterMapper;
+use App\Source\Shared\Adapter\UseCase\UseCaseBase;
 
 final class ProductQueryUseCase extends UseCaseBase
 {
@@ -14,8 +17,9 @@ final class ProductQueryUseCase extends UseCaseBase
         return new self($repository);
     }
 
-    public function execute(): array {
-        $entities = $this->repository->query();
+    public function execute(PageFilterDto $pageFilterDto): array {
+        $pageFilterEntity = PageFilterMapper::make()->dtoToEntity($pageFilterDto);
+        $entities = ProductQueryService::make($this->repository)->execute($pageFilterEntity);
 
         $dtosMapped = [];
         $mapper = ProductMapper::make();
@@ -23,6 +27,6 @@ final class ProductQueryUseCase extends UseCaseBase
             array_push($dtosMapped, $mapper->entityToDto($value));
         }
 
-        return $dtosMapped;
+        return $dtosMapped;        
     }
 }

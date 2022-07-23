@@ -20,7 +20,7 @@ class PageDto extends Data
     public ?int $limit,    
 
     #[Rule('nullable|integer')]
-    public ?int $skip,
+    public ?int $current,
 
     #[Rule('nullable|array')]
     public ?array $columns,

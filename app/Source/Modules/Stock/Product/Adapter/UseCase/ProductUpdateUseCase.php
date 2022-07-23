@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Source\Modules\Stock\Product\Domain\UseCase;
+namespace App\Source\Modules\Stock\Product\Adapter\UseCase;
 
 use App\Source\Modules\Stock\Product\Adapter\Dto\ProductDto;
 use App\Source\Modules\Stock\Product\Adapter\Mapper\ProductMapper;
+use App\Source\Modules\Stock\Product\Domain\Service\ProductUpdateService;
 use App\Source\Modules\Stock\Product\Port\Repository\ProductRepositoryInterface;
-use App\Source\Shared\Domain\UseCase\UseCaseBase;
+use App\Source\Shared\Adapter\UseCase\UseCaseBase;
 
-final class ProductStoreUseCase extends UseCaseBase
+final class ProductUpdateUseCase extends UseCaseBase
 {
     private ProductMapper $mapper;
     private function __construct(private ProductRepositoryInterface $repository){
@@ -18,10 +19,10 @@ final class ProductStoreUseCase extends UseCaseBase
         return new self($repository);
     }
 
-    public function execute(ProductDto $dto): ProductDto {
-        $entityMapped = $this->mapper->dtoToEntity($dto);
-        $entityStored = $this->repository->store($entityMapped);
-        $dtoMapped = $this->mapper->entityToDto($entityStored);
+    public function execute(ProductDto $dto, int $id): ProductDto {
+        $entity = $this->mapper->dtoToEntity($dto);        
+        $entityUpdated = ProductUpdateService::make($this->repository)->execute($entity, $id);
+        $dtoMapped = $this->mapper->entityToDto($entityUpdated);
 
         return $dtoMapped;
     }

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Source\Modules\Stock\Product\Domain\UseCase;
+namespace App\Source\Modules\Stock\Product\Adapter\UseCase;
 
 use App\Source\Modules\Stock\Product\Adapter\Mapper\ProductMapper;
+use App\Source\Modules\Stock\Product\Domain\Service\ProductIndexService;
 use App\Source\Modules\Stock\Product\Port\Repository\ProductRepositoryInterface;
-use App\Source\Shared\Domain\UseCase\UseCaseBase;
+use App\Source\Shared\Adapter\UseCase\UseCaseBase;
 
 final class ProductIndexUseCase extends UseCaseBase
 {
@@ -15,7 +16,7 @@ final class ProductIndexUseCase extends UseCaseBase
     }
 
     public function execute(): array {
-        $entities = $this->repository->index();
+        $entities = ProductIndexService::make($this->repository)->execute();
 
         $dtosMapped = [];
         $mapper = ProductMapper::make();
@@ -23,6 +24,6 @@ final class ProductIndexUseCase extends UseCaseBase
             array_push($dtosMapped, $mapper->entityToDto($value));
         }
 
-        return $dtosMapped;
+        return $dtosMapped;        
     }
 }
