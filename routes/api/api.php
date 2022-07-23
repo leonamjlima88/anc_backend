@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -36,3 +37,8 @@ Route::get('/clear-cache', function () {
     Cache::flush();
     return "Cache is cleared";
 });
+
+Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('logout', 'AuthController@logout');
+Route::post('refresh', 'AuthController@refresh');
+Route::post('me', 'AuthController@me');
