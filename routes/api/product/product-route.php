@@ -1,25 +1,20 @@
 <?php
 
+use App\Source\Modules\Stock\Product\Adapter\Controller\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /**
  * Product (Estoque)
  */
 Route::group([
-  // 'middleware' => [
-  //   'api', 
-  //   InitializeTenancyByDomain::class, 
-  //   PreventAccessFromCentralDomains::class,
-  //   'jwt',
-  //   'acl',
-  //   'X-Locale'
-  // ],
-  'namespace' => 'App\Source\Modules\Product\Adapter\Controller'
-  // 'prefix' => 'stock',
+  'middleware' => [
+    'jwt',
+  ],
+  'prefix' => 'stock',
 ], function () {
-  Route::get("/product",         "ProductController@index")->name("product.index");
-  Route::post("/product",        "ProductController@store")->name("product.store");
-  Route::get("/product/{id}",    "ProductController@show")->name("product.show");
-  Route::put("/product/{id}",    "ProductController@update")->name("product.update");
-  Route::delete("/product/{id}", "ProductController@destroy")->name("product.destroy");
+  Route::get("product",         [ProductController::class, 'index'])->name("stock-product.index");
+  Route::post("product",        [ProductController::class, 'store'])->name("stock-product.store");
+  Route::get("product/{id}",    [ProductController::class, 'show'])->name("stock-product.show");
+  Route::put("product/{id}",    [ProductController::class, 'update'])->name("stock-product.update");
+  Route::delete("product/{id}", [ProductController::class, 'destroy'])->name("stock-product.destroy");
 });

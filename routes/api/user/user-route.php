@@ -14,12 +14,14 @@ Route::group([
   //   'acl',
   //   'X-Locale'
   // ],
-  'namespace' => 'App\Source\Modules\User\Adapter\Controller'
+  // 'namespace' => 'App\Source\Modules\User\Adapter\Controller'
+  'namespace' => 'App\Http\Controllers'
   // 'prefix' => 'stock',
 ], function () {
-  Route::get("/user",         "UserController@index")->name("user.index");
-  Route::post("/user",        "UserController@store")->name("user.store");
-  Route::get("/user/{id}",    "UserController@show")->name("user.show");
-  Route::put("/user/{id}",    "UserController@update")->name("user.update");
-  Route::delete("/user/{id}", "UserController@destroy")->name("user.destroy");
+  Route::post("/user/auth",         "UserController@auth")->name("user.auth");
+  // Route::get("/user",         "UserController@index")->name("user.index");
+  // Route::post("/user",        "UserController@store")->name("user.store");
+  // Route::get("/user/{id}",    "UserController@show")->name("user.show");
+  // Route::put("/user/{id}",    "UserController@update")->name("user.update");
+  // Route::delete("/user/{id}", "UserController@destroy")->name("user.destroy");
 });
