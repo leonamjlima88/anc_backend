@@ -78,7 +78,7 @@ class Handler extends ExceptionHandler
             );
         }
 
-        // Model não encontrado
+        // Entity não encontrado
         if ($exceptionName === 'EntityNotFoundException') {
             return Res::error(
                 $exception->getMessage(),
