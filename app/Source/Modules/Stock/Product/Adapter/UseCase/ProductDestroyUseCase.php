@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Source\Modules\Stock\Product\Domain\UseCase;
+namespace App\Source\Modules\Stock\Product\Adapter\UseCase;
 
+use App\Source\Modules\Stock\Product\Domain\Service\ProductDestroyService;
 use App\Source\Modules\Stock\Product\Port\Repository\ProductRepositoryInterface;
-use App\Source\Shared\Domain\UseCase\UseCaseBase;
+use App\Source\Shared\Adapter\UseCase\UseCaseBase;
 
 final class ProductDestroyUseCase extends UseCaseBase
 {
@@ -14,6 +15,6 @@ final class ProductDestroyUseCase extends UseCaseBase
     }
 
     public function execute(int $id): bool|null {
-        return $this->repository->destroy($id);
+        return ProductDestroyService::make($this->repository)->execute($id);
     }
 }

@@ -2,18 +2,17 @@
 
 namespace App\Source\Modules\Stock\Product\Adapter\Controller;
 
-use App\Source\Modules\Stock\Product\Domain\UseCase\ProductDestroyUseCase;
-use App\Source\Modules\Stock\Product\Domain\UseCase\ProductIndexUseCase;
-use App\Source\Modules\Stock\Product\Domain\UseCase\ProductShowUseCase;
-use App\Source\Modules\Stock\Product\Domain\UseCase\ProductStoreUseCase;
-use App\Source\Modules\Stock\Product\Domain\UseCase\ProductUpdateUseCase;
 use App\Source\Modules\Stock\Product\Adapter\Dto\ProductDto;
-use App\Source\Modules\Stock\Product\Domain\UseCase\ProductQueryUseCase;
+use App\Source\Modules\Stock\Product\Adapter\UseCase\ProductDestroyUseCase;
+use App\Source\Modules\Stock\Product\Adapter\UseCase\ProductIndexUseCase;
+use App\Source\Modules\Stock\Product\Adapter\UseCase\ProductQueryUseCase;
+use App\Source\Modules\Stock\Product\Adapter\UseCase\ProductShowUseCase;
+use App\Source\Modules\Stock\Product\Adapter\UseCase\ProductStoreUseCase;
+use App\Source\Modules\Stock\Product\Adapter\UseCase\ProductUpdateUseCase;
 use App\Source\Modules\Stock\Product\Port\Repository\ProductRepositoryInterface;
 use App\Source\Shared\Adapter\Controller\Controller;
 use App\Source\Shared\Adapter\Dto\PageFilter\PageFilterDto;
 use App\Source\Shared\util\Res;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class ProductController extends Controller
@@ -28,11 +27,10 @@ class ProductController extends Controller
       : Res::error(code: Response::HTTP_NOT_FOUND);
   }
 
-  public function index(Request $request)
+  public function index()
   {
-    return Res::success(
-      ProductIndexUseCase::make($this->repository)->execute()
-    );
+    $data = ProductIndexUseCase::make($this->repository)->execute();
+    return Res::success($data);
   }
 
   public function show(int $id)
@@ -44,23 +42,19 @@ class ProductController extends Controller
 
   public function store(ProductDto $dto)
   {
-    return Res::success(
-      ProductStoreUseCase::make($this->repository)->execute($dto),
-      Response::HTTP_CREATED
-  );
+    $data = ProductStoreUseCase::make($this->repository)->execute($dto);
+    return Res::success($data, Response::HTTP_CREATED);
   }
 
   public function update(ProductDto $dto, int $id)
   {
-    return Res::success(
-      ProductUpdateUseCase::make($this->repository)->execute($dto, $id)
-    );    
+    $data = ProductUpdateUseCase::make($this->repository)->execute($dto, $id);
+    return Res::success($data);
   }
 
   public function query(PageFilterDto $dto)
   {
-    return Res::success(
-      ProductQueryUseCase::make($this->repository)->execute($dto)
-    );
+    $data = ProductQueryUseCase::make($this->repository)->execute($dto);
+    return Res::success($data);
   }
 }
