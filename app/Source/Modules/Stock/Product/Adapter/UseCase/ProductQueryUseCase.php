@@ -19,14 +19,8 @@ final class ProductQueryUseCase extends UseCaseBase
 
     public function execute(PageFilterDto $pageFilterDto): array {
         $pageFilterEntity = PageFilterMapper::make()->dtoToEntity($pageFilterDto);
-        $entities = ProductQueryService::make($this->repository)->execute($pageFilterEntity);
-
-        $dtosMapped = [];
-        $mapper = ProductMapper::make();
-        foreach ($entities as $value) {
-            array_push($dtosMapped, $mapper->entityToDto($value));
-        }
-
-        return $dtosMapped;        
+        $simpleArray = ProductQueryService::make($this->repository)->execute($pageFilterEntity);
+        
+        return $simpleArray;        
     }
 }

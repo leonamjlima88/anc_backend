@@ -23,7 +23,7 @@ class Res
         ];
     }
 
-    static public function success(mixed $data = [], int $code = Response::HTTP_OK, string $msg = ''): JsonResponse
+    public static  function success(mixed $data = [], int $code = Response::HTTP_OK, string $msg = ''): JsonResponse
     {
         // Quando nenhuma mensagem informado, seta um default
         if (!$msg){
@@ -47,7 +47,7 @@ class Res
         return response()->json($baseResponse, $code);        
     }
 
-    static public function error(mixed $data = [], int $code = Response::HTTP_BAD_REQUEST, string $msg = ''): JsonResponse
+    public static function error(mixed $data = [], int $code = Response::HTTP_BAD_REQUEST, string $msg = ''): JsonResponse
     {
         // Quando nenhuma mensagem informado, seta um default
         if (!$msg) {

@@ -4,13 +4,12 @@ namespace App\Source\Modules\Stock\Product\Adapter\Mapper;
 
 use App\Source\Modules\Stock\Product\Domain\Entity\ProductEntity;
 use App\Source\Modules\Stock\Product\Adapter\Dto\ProductDto;
-use Illuminate\Database\Eloquent\Model;
 
 final class ProductMapper
 {
   private function __construct(){}
   
-  static public function make(): self
+  public static function make(): self
   {
     return new self();
   }
@@ -25,8 +24,12 @@ final class ProductMapper
     return new ProductDto(...$entity->toArray());
   }
 
-  public function modelToEntity(Model $model): ProductEntity
+  public function entityToDtoCollection(array $entities): array
   {
-    return new ProductEntity(...$model->toArray());
-  }
+    $dtosMapped = [];
+    foreach ($entities as $value) 
+      array_push($dtosMapped, $this->entityToDto($value));    
+
+    return $dtosMapped;
+  }  
 }

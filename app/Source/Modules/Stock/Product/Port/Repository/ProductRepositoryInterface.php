@@ -3,6 +3,7 @@
 namespace App\Source\Modules\Stock\Product\Port\Repository;
 
 use App\Source\Modules\Stock\Product\Domain\Entity\ProductEntity;
+use App\Source\Shared\Domain\Entity\PageFilter\PageFilterEntity;
 
 interface ProductRepositoryInterface
 {
@@ -11,5 +12,5 @@ interface ProductRepositoryInterface
     public function show(int $id): ProductEntity|null;
     public function update(ProductEntity $entity, int $id): ProductEntity;
     public function destroy(int $id): bool|null;    
-    public function query(): array;
+    public function query(PageFilterEntity $pageFilterEntity): array;
 }

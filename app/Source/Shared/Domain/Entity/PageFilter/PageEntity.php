@@ -22,7 +22,7 @@ final class PageEntity
     return $this->owner;
   }
 
-  public function config(bool $isPaginate, int $limit, int $current, array $columns): self
+  public function config(bool $isPaginate, int $limit, int $current, array|null $columns): self
   {
     $this->isPaginate = $isPaginate;
     $this->limit = $limit;

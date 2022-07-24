@@ -19,7 +19,7 @@ final class ProductEntity
     return (array) $this;
   }
 
-  static public function fromArray(array $data)
+  public static  function fromArray(array $data)
   {
     return new self(...$data);
   }
