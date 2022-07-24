@@ -43,14 +43,14 @@ final class GenericQueryEloquent
   private function setWhere(): self 
   {
     if ($this->pageFilterEntity->filter?->where) {
-      foreach ($this->pageFilterEntity->filter->where as $where) {
-        $this->qry->where(function ($query) use ($where) {
+      $this->qry->where(function ($query) {
+        foreach ($this->pageFilterEntity->filter->where as $where) {
           foreach ($where->fieldValue as $fieldValue) {
             $formated = $this->formatOperatorAndFieldValue($where->operator, $fieldValue);
             $query->where($where->fieldName, $formated[0], $formated[1]);
           }
-        });
-      }
+        }
+      });      
     }
     return $this;
   }
@@ -58,14 +58,14 @@ final class GenericQueryEloquent
   private function setOrWhere(): self 
   {
     if ($this->pageFilterEntity->filter?->orWhere) {
-      foreach ($this->pageFilterEntity->filter->orWhere as $orWhere) {
-        $this->qry->where(function ($query) use ($orWhere) {
+      $this->qry->where(function ($query) {
+        foreach ($this->pageFilterEntity->filter->orWhere as $orWhere) {
           foreach ($orWhere->fieldValue as $fieldValue) {
             $formated = $this->formatOperatorAndFieldValue($orWhere->operator, $fieldValue);
             $query->orWhere($orWhere->fieldName, $formated[0], $formated[1]);
           }
-        });
-      }
+        }
+      });      
     }
     return $this;
   }
@@ -90,6 +90,7 @@ final class GenericQueryEloquent
 
       // Executar paginação e armazenar resultado em $simpleArray
       $skip = ($this->pageFilterEntity->page->current - 1) * $this->pageFilterEntity->page->limit;
+
       $simpleArray = $this->qry
         ->skip($skip)
         ->take($this->pageFilterEntity->page->limit)
