@@ -17,12 +17,7 @@ final class ProductIndexUseCase extends UseCaseBase
 
     public function execute(): array {
         $entities = ProductIndexService::make($this->repository)->execute();
-
-        $dtosMapped = [];
-        $mapper = ProductMapper::make();
-        foreach ($entities as $value) {
-            array_push($dtosMapped, $mapper->entityToDto($value));
-        }
+        $dtosMapped = ProductMapper::make()->entityToDtoCollection($entities);
 
         return $dtosMapped;        
     }

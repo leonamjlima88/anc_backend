@@ -5,6 +5,9 @@ namespace App\Source\Modules\Stock\Product\Adapter\Repository\Eloquent;
 use App\Source\Modules\Stock\Product\Domain\Entity\ProductEntity;
 use App\Source\Modules\Stock\Product\Adapter\Mapper\ProductMapper;
 use App\Source\Modules\Stock\Product\Port\Repository\ProductRepositoryInterface;
+use App\Source\Shared\Adapter\Repository\Eloquent\GenericQueryEloquent;
+use App\Source\Shared\Domain\Entity\PageFilter\PageFilterEntity;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductRepositoryEloquent implements ProductRepositoryInterface
@@ -16,11 +19,7 @@ class ProductRepositoryEloquent implements ProductRepositoryInterface
     
     public function index(): array {
         $models = $this->model->get();
-
-        $entities = [];
-        foreach ($models as $value) {
-            array_push($entities, $this->mapper->modelToEntity($value));
-        }
+        $entities = $this->modelToEntityCollection($models);
 
         return $entities; 
     }
@@ -60,15 +59,22 @@ class ProductRepositoryEloquent implements ProductRepositoryInterface
             : false;
     }
 
-    public function query(): array
+    public function query(PageFilterEntity $pageFilterEntity): array
     {
-        $models = $this->model->get();
+        return GenericQueryEloquent::make($pageFilterEntity, $this->model)->execute();
+    }
 
+    private function modelToEntity(Model $model): ProductEntity {
+        $entity = new ProductEntity(...$model->toArray());
+
+        return $entity;
+    }
+
+    private function modelToEntityCollection(Collection $models): array {
         $entities = [];
-        foreach ($models as $value) {
-            array_push($entities, $this->mapper->modelToEntity($value));
-        }
+        foreach ($models as $value)
+            array_push($entities, $this->modelToEntity($value));        
 
-        return $entities;    
+        return $entities;
     }
 }

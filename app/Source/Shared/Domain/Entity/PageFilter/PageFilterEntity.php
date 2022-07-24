@@ -27,17 +27,3 @@ final class PageFilterEntity
     return $this->filter;
   }  
 }
-
-// Exemplo de uso:
-// $filters = PageFilterEntity::make()
-//   ->openPage()
-//     ->config(true, 5, 1, ['teste1', 'teste2', 'teste3'])
-//   ->end()
-//   ->openFilter()
-//     ->addWhere('product.name', OperatorEnum::LIKE_ANYWHERE, ['teste', 'teste2'])
-//     ->addWhere('product.name', OperatorEnum::LIKE_ANYWHERE, ['teste', 'teste2'])
-//     ->addWhere('product.name', OperatorEnum::LIKE_ANYWHERE, ['teste', 'teste2'])
-//     ->addOrWhere('product.name', OperatorEnum::LIKE_ANYWHERE, ['teste', 'teste2'])
-//     ->addOrWhere('product.name', OperatorEnum::LIKE_ANYWHERE, ['teste', 'teste2'])
-//     ->addOrWhere('product.name', OperatorEnum::LIKE_ANYWHERE, ['teste', 'teste2'])
-//   ->end();

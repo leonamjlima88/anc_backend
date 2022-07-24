@@ -79,4 +79,26 @@ final class FilterEntity
     return $this;
   }
 
+  public function addOrWhereCollection(array $collection): self {
+    foreach ($collection as $value) {
+      $this->addOrWhere(
+        $value['fieldName'],
+        OperatorEnum::from($value['operator']),
+        $value['fieldValue'],
+      );
+    }
+
+    return $this;
+  }
+
+  public function addOrderByCollection(array $collection): self {
+    foreach ($collection as $value) {
+      $this->addOrderBy(
+        $value['fieldName'],
+        DirectionEnum::from($value['direction']),        
+      );
+    }
+
+    return $this;
+  }
 }

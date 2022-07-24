@@ -35,5 +35,5 @@ class PageDto extends Data
   public function toResource(): array
   {
     return parent::toArray();
-  }
+  }  
 }
