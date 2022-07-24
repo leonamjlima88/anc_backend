@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Route;
  */
 Route::group([
   'middleware' => [
-    'jwt',
+    // 'jwt',
+    'X-Locale',
   ],
   'prefix' => 'stock',
 ], function () {
