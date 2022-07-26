@@ -1,6 +1,8 @@
 <?php
 
 return [
+  'field_is_required' => 'The field value (:value) is required!',
+  'field_is_unique' => 'The field value (:value) is being used by another record. This field is unique!',
   'field_is_not_valid' => 'The field value (:value) is not valid!',
   'field_can_not_be_null' => 'The field can not be null.',
   'array_must_have_single_record_default' => 'The list must have a single record default.',
