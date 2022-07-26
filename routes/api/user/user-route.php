@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
   // 'middleware' => [
   //   'api', 
-  //   InitializeTenancyByDomain::class, 
-  //   PreventAccessFromCentralDomains::class,
-  //   'jwt',
+  //   env('AUTH'),
   //   'acl',
   //   'X-Locale'
   // ],

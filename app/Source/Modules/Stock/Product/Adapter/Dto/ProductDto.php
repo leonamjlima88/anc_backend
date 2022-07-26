@@ -48,6 +48,18 @@ class ProductDto extends Data
     ];
   }
 
+  public static function messages(): array
+  {
+    return [
+      'sku.required' => trans(
+        'request_validation_lang.field_is_required', ['value' => 'Código de Referência']
+      ),
+      'sku.unique' => trans(
+        'request_validation_lang.field_is_unique', ['value' => 'Código de Referência']
+      ),
+    ];
+  }
+
   /**
    * Utilizado para extrair dados formatados se necessário
    *
