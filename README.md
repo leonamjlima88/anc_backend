@@ -62,8 +62,11 @@ Autenticação jwt não foi finalizada no frontend
 
 Caso queira testar autenticação com insomnia ou postman, altere o atributo AUTH= para AUTH=jwt
 
+5-Criar base de dados com o nome definido na configuração acima do banco. por padrão é anc
 
-5-php artisan serve ou hospedar em nginx e apontar hosts da máquina
+6-Rodar php artisan migrate para criar tabelas
+
+7-Rodar php artisan serve para rodar projeto
 
 
 ### O que não foi feito?
