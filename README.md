@@ -76,3 +76,99 @@ Caso queira testar autenticação com insomnia ou postman, altere o atributo AUT
 Finalização da arquitetura hexagonal em autenticação e usuários.
 
 Tratamento de algumas exceções
+
+
+### Endpoints
+* [GET]/ping
+* [GET]/clear-cache
+* [GET]/auth/login
+
+{
+"email": "l@msn.com",
+"password": "adm123"
+}
+
+* [POST]/auth/register
+
+{
+	"name": "Leonam",
+	"email": "leonamjlima88@gmail.com",
+	"password": "adm123",
+	"password_confirmation": "adm123"
+}
+
+* [POST]/auth/me
+* [POST]/auth/logout
+
+
+* [GET]/stock/product
+* [POST]/stock/product/query
+
+{
+  "page": {
+    "isPaginate": true,
+    "limit": 10,
+    "current": 1,
+    "columns": []
+  },
+  "filter": {
+    "orderBy": [
+      {
+        "fieldName": "product.name",
+        "direction": "asc"
+      }
+    ],
+    "where": [],
+    "orWhere": [
+      {
+        "fieldName": "product.id",
+        "operator": "likeAnywhere",
+        "fieldValue": [
+          "XXX"
+        ]
+      },
+      {
+        "fieldName": "product.name",
+        "operator": "likeAnywhere",
+        "fieldValue": [
+          "XXX"
+        ]
+      },
+      {
+        "fieldName": "product.description",
+        "operator": "likeAnywhere",
+        "fieldValue": [
+          "XXX"
+        ]
+      },
+      {
+        "fieldName": "product.sku",
+        "operator": "likeAnywhere",
+        "fieldValue": [
+          "XXX"
+        ]
+      }
+    ]
+  }
+}
+
+* [GET]/stock/product/3
+* [POST]/stock/product
+
+{
+	"name": "Teste",
+	"description": "Descrição de teste",
+	"sku": "6",
+	"price": "150.99"
+}
+
+* [PUT]/stock/product/6
+
+{
+	"name": "Teste edittt",
+	"description": "Descrição de teste",
+	"sku": "6",
+	"price": 15023.95
+}
+
+* [DELETE]/stock/product/2
