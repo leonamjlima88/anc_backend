@@ -1,27 +1,3 @@
-### Vocabulário
-Arquitetura Hexagonal: Permite o crescimento do projeto de forma saudável sem dependências de frameworks, inclusive do próprio láravel.
-
-Controller: Responsável em atender requisições e responder o frontend/mundo externo.
-
-Dto: Objeto de transferência de dados entre camadas. Higienizador de input e output.
-
-Mapper: Mapeamento de camada Adapter (camada suja) para Domain (camada limpa).
-
-Repository: Camada de persistência de dados
-
-UseCase: Fluxo de serviços da camada Adapter (camada suja)
-
-DomainServices: Regra de negócio dos domínios.
-
-Fluent Interface: Escrita de código corrente, fluída, encadeamento de funções.
-
-SRP=Princípio de Responsabilidade única: Uma classe deve ter uma única responsabilidade.
-
-OCP=Princípio de Aberto e Fechado: Aberto para novas implementações, fechado para modificações.
-
-DIP=Princípio de Inversão de Dependência: Injeção de interfaces que não transferem responsabilidades para a classe receptora.
-
-
 ### O que foi feito?
 
 Projeto Laravel com Arquitetura Hexagonal (Ports and Adapters) e estruturação de pastas modular.
