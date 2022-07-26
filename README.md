@@ -68,6 +68,8 @@ Caso queira testar autenticação com insomnia ou postman, altere o atributo AUT
 
 7-Rodar php artisan serve para rodar projeto
 
+# 8- Login padrão de acesso: adm@msn.com, senha: adm123
+
 
 ### O que não foi feito?
 
